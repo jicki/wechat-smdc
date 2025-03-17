@@ -1,0 +1,50 @@
+<view class="container">
+  <view class="login-header">
+    <view class="logo-icon">
+      <icon type="success" size="60" color="#FF6B6B"></icon>
+    </view>
+    <view class="title">美食点餐</view>
+    <view class="subtitle">登录后即可点餐</view>
+  </view>
+  
+  <view class="login-content">
+    <view wx:if="{{isLogin}}" class="logged-in">
+      <view class="user-info">
+        <view class="avatar-icon">
+          <icon type="success" size="40" color="#FF6B6B"></icon>
+        </view>
+        <view class="user-name">{{userInfo.nickName || '用户'}}</view>
+        <view class="user-phone">{{userInfo.phone || ''}}</view>
+      </view>
+      
+      <button class="btn-logout" bindtap="logout">退出登录</button>
+    </view>
+    
+    <view wx:else class="login-form">
+      <view class="login-tips">
+        <text>登录后即可享受更多服务</text>
+      </view>
+      
+      <button 
+        wx:if="{{canIUseGetUserProfile}}" 
+        class="btn-login" 
+        bindtap="getUserProfile"
+      >微信用户信息授权</button>
+      
+      <button 
+        class="btn-login" 
+        open-type="getPhoneNumber" 
+        bindgetphonenumber="getPhoneNumber"
+      >微信手机号登录</button>
+      
+      <button 
+        class="btn-login btn-test" 
+        bindtap="testLogin"
+      >测试账号登录 (admin/123456)</button>
+    </view>
+  </view>
+  
+  <view class="login-footer">
+    <text>登录即代表您已同意《用户协议》和《隐私政策》</text>
+  </view>
+</view> 

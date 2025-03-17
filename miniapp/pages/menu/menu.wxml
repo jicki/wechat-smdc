@@ -1,0 +1,167 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading-container">
+    <view class="loading">加载中...</view>
+  </view>
+  
+  <view wx:elif="{{!restaurant || allDishes.length === 0}}" class="empty-container">
+    <view class="empty-text">暂无菜单信息</view>
+  </view>
+  
+  <view wx:else class="menu-container">
+    <!-- 餐厅信息 - 固定在顶部 -->
+    <view class="restaurant-info fixed-header">
+      <view class="restaurant-header">
+        <view class="restaurant-name">{{restaurant.name}}</view>
+      </view>
+      
+      <view class="restaurant-promotion" wx:if="{{restaurant.promotion}}">
+        <view class="promotion-icon">
+          <icon type="info" size="14" color="#FF6B6B"></icon>
+        </view>
+        <text class="promotion-text">{{restaurant.promotion}}</text>
+      </view>
+    </view>
+    
+    <!-- 菜单内容 - 可滚动区域 -->
+    <view class="menu-content">
+      <!-- 左侧分类列表 -->
+      <scroll-view 
+        class="category-list" 
+      >
+        <view 
+          class="category-item {{currentCategory.id === category.id ? 'active' : ''}}" 
+          wx:for="{{categories}}" 
+          wx:key="id" 
+          wx:for-item="category"
+          bindtap="switchCategory"
+          data-category="{{category}}"
+          data-category-id="{{category.id}}"
+        >
+          {{category.name}}
+        </view>
+      </scroll-view>
+      
+      <!-- 右侧菜品列表 -->
+      <scroll-view 
+        class="food-list" 
+        scroll-y 
+        scroll-into-view="{{scrollIntoView}}"
+        scroll-with-animation="{{true}}"
+        bindscroll="onFoodScroll"
+        show-scrollbar="false"
+      >
+        <view 
+          wx:for="{{categories}}" 
+          wx:key="id" 
+          wx:for-item="category"
+          id="category-{{category.id}}"
+          class="category-section"
+        >
+          <view class="category-title">{{category.name}}</view>
+          
+          <view 
+            class="food-item" 
+            wx:for="{{categorizedDishes[category.id]}}" 
+            wx:key="id"
+          >
+            <view class="food-image">
+              <image 
+                wx:if="{{item.image}}" 
+                src="{{item.image}}" 
+                mode="aspectFill" 
+                class="food-img"
+                lazy-load="true"
+              ></image>
+              <view class="food-icon" wx:else>
+                <icon type="info" size="40" color="#FF6B6B"></icon>
+              </view>
+              <view class="food-tag" wx:if="{{item.isRecommended}}">推荐</view>
+              <view class="food-tag spicy" wx:if="{{item.isSpicy}}">辣</view>
+            </view>
+            
+            <view class="food-info">
+              <view class="food-name">{{item.name}}</view>
+              <view class="food-desc">{{item.description}}</view>
+              <view class="food-sales">月售 {{item.sales || 0}}</view>
+              <view class="food-price-actions">
+                <view class="food-price">
+                  <text class="price">¥{{item.price}}</text>
+                  <text class="original-price" wx:if="{{item.originalPrice > item.price}}">¥{{item.originalPrice}}</text>
+                </view>
+                
+                <view class="food-actions">
+                  <view class="action-btn minus" bindtap="removeFromCart" data-id="{{item.id}}" wx:if="{{item.quantity > 0}}">
+                    <text>-</text>
+                  </view>
+                  <view class="food-count" wx:if="{{item.quantity > 0}}">{{item.quantity}}</view>
+                  <view class="action-btn plus" bindtap="addToCart" data-item="{{item}}">
+                    <text>+</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  
+  <!-- 购物车展开面板 -->
+  <view class="cart-panel {{isCartPanelShow ? 'show' : ''}}" wx:if="{{!loading && restaurant}}">
+    <!-- 遮罩层 -->
+    <view class="cart-panel-mask" bindtap="toggleCartPanel"></view>
+    <!-- 内容区域 -->
+    <view class="cart-panel-content">
+      <view class="cart-panel-header">
+        <view class="cart-panel-title">已选商品</view>
+        <view class="cart-panel-clear" bindtap="clearCart">
+          <icon type="clear" size="14" color="#999"></icon>
+          <text>清空购物车</text>
+        </view>
+      </view>
+      
+      <scroll-view class="cart-panel-list" scroll-y>
+        <view class="cart-panel-item" wx:for="{{cartItems}}" wx:key="id">
+          <view class="cart-panel-item-info">
+            <image 
+              wx:if="{{item.image}}" 
+              src="{{item.image}}" 
+              mode="aspectFill" 
+              class="cart-panel-item-img"
+              lazy-load="true"
+            ></image>
+            <view class="cart-panel-item-name">{{item.name}}</view>
+          </view>
+          <view class="cart-panel-item-price">¥{{item.price}}</view>
+          <view class="cart-panel-item-actions">
+            <view class="action-btn minus" bindtap="removeFromCart" data-id="{{item.id}}">
+              <text>-</text>
+            </view>
+            <view class="food-count">{{item.quantity}}</view>
+            <view class="action-btn plus" bindtap="addToCart" data-item="{{item}}">
+              <text>+</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  
+  <!-- 底部购物车 -->
+  <view class="cart-bar" wx:if="{{!loading && restaurant}}">
+    <view class="cart-info" bindtap="toggleCartPanel">
+      <view class="cart-icon {{cartCount > 0 ? 'active' : ''}}">
+        <view class="shopping-cart-icon"></view>
+        <view class="cart-count" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
+      </view>
+      <view class="cart-price {{cartCount > 0 ? 'active' : ''}}">
+        <text wx:if="{{cartCount > 0}}">¥{{cartTotal}}</text>
+        <text wx:else>未选购商品</text>
+      </view>
+    </view>
+    
+    <view class="cart-submit {{cartCount > 0 ? 'active' : ''}}" bindtap="goToCart">
+      <text>去结算</text>
+    </view>
+  </view>
+</view> 

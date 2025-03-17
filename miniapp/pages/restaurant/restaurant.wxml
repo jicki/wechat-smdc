@@ -1,0 +1,98 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="loading-container">
+    <view class="loading">加载中...</view>
+  </view>
+  
+  <view wx:elif="{{!restaurant}}" class="empty-container">
+    <view class="empty-text">餐厅信息不存在</view>
+  </view>
+  
+  <view wx:else class="restaurant-detail">
+    <!-- 餐厅图片 -->
+    <view class="restaurant-banner">
+      <view class="restaurant-icon">
+        <icon type="success" size="60" color="#FF6B6B"></icon>
+      </view>
+    </view>
+    
+    <!-- 餐厅基本信息 -->
+    <view class="restaurant-info card">
+      <view class="restaurant-name">{{restaurant.name}}</view>
+      <view class="restaurant-rating">
+        <text class="rating-score">{{restaurant.rating}}</text>
+        <text class="rating-count">({{restaurant.ratingCount}})</text>
+      </view>
+      <view class="restaurant-price">人均 ¥{{restaurant.averagePrice}}</view>
+      <view class="restaurant-tags">
+        <text class="tag" wx:for="{{restaurant.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+      </view>
+      <view class="restaurant-promotion" wx:if="{{restaurant.promotion}}">
+        <text class="promotion-text">{{restaurant.promotion}}</text>
+      </view>
+    </view>
+    
+    <!-- 餐厅联系方式 -->
+    <view class="restaurant-contact card">
+      <view class="contact-item" bindtap="openLocation">
+        <view class="contact-icon">
+          <icon type="location" size="18" color="#FF6B6B"></icon>
+        </view>
+        <view class="contact-info">
+          <view class="contact-label">地址</view>
+          <view class="contact-value">{{restaurant.address}}</view>
+        </view>
+        <view class="contact-arrow">
+          <icon type="navigate" size="16" color="#999"></icon>
+        </view>
+      </view>
+      
+      <view class="contact-item" bindtap="makePhoneCall">
+        <view class="contact-icon">
+          <icon type="phone" size="18" color="#FF6B6B"></icon>
+        </view>
+        <view class="contact-info">
+          <view class="contact-label">电话</view>
+          <view class="contact-value">{{restaurant.phone}}</view>
+        </view>
+        <view class="contact-arrow">
+          <icon type="navigate" size="16" color="#999"></icon>
+        </view>
+      </view>
+      
+      <view class="contact-item">
+        <view class="contact-icon">
+          <icon type="time" size="18" color="#FF6B6B"></icon>
+        </view>
+        <view class="contact-info">
+          <view class="contact-label">营业时间</view>
+          <view class="contact-value">{{restaurant.businessHours}}</view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 餐厅位置地图 -->
+    <view class="restaurant-map card">
+      <view class="section-title">餐厅位置</view>
+      <map 
+        class="map" 
+        latitude="{{latitude}}" 
+        longitude="{{longitude}}" 
+        markers="{{markers}}" 
+        scale="16" 
+        show-location
+        bindtap="openLocation"
+      ></map>
+    </view>
+    
+    <!-- 餐厅介绍 -->
+    <view class="restaurant-description card">
+      <view class="section-title">餐厅介绍</view>
+      <view class="description-content">{{restaurant.description}}</view>
+    </view>
+  </view>
+  
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar" wx:if="{{restaurant}}">
+    <button class="btn-order" bindtap="goToMenu">查看菜单</button>
+  </view>
+</view> 

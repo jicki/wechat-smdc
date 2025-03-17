@@ -1,0 +1,198 @@
+.container {
+  padding-bottom: 120rpx;
+}
+
+/* 卡片通用样式 */
+.card {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 订单信息 */
+.order-info {
+  margin-bottom: 20rpx;
+}
+
+.order-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+}
+
+/* 桌台号样式 */
+.order-item.table-info {
+  padding: 20rpx 0;
+}
+
+.order-item.table-info.warning {
+  background-color: #FFF8E1;
+  border-radius: 8rpx;
+  padding: 20rpx 10rpx;
+  margin: 10rpx 0;
+}
+
+.order-item.table-info.optional {
+  background-color: #F9F9F9;
+  border-radius: 8rpx;
+  padding: 20rpx 10rpx;
+  margin: 10rpx 0;
+}
+
+.item-value.table-no {
+  font-weight: bold;
+  color: #FF6B6B;
+}
+
+.item-value.table-no.warning {
+  color: #FF9800;
+}
+
+.item-value.table-no.optional {
+  color: #999;
+  font-weight: normal;
+}
+
+.item-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.item-value {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.item-value.price {
+  color: #FF6B6B;
+  font-weight: bold;
+}
+
+/* 支付方式 */
+.payment-methods {
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.payment-method:last-child {
+  border-bottom: none;
+}
+
+.payment-method.active {
+  background-color: #f8f8f8;
+}
+
+.method-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 20rpx;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.method-icon.wxpay {
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB0PSIxNjI3NTQ2NTg0NTI5IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjQxNjAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cGF0aCBkPSJNMzgzLjcgNDI5LjZjLTEzLjQgMC0yNC4yLTEwLjgtMjQuMi0yNC4yczEwLjgtMjQuMiAyNC4yLTI0LjIgMjQuMiAxMC44IDI0LjIgMjQuMi0xMC44IDI0LjItMjQuMiAyNC4yeiBtMTk5LjEgMGMtMTMuNCAwLTI0LjItMTAuOC0yNC4yLTI0LjJzMTAuOC0yNC4yIDI0LjItMjQuMiAyNC4yIDEwLjggMjQuMiAyNC4yLTEwLjggMjQuMi0yNC4yIDI0LjJ6IG0tMTk5LjEgMTQ1LjJjLTEzLjQgMC0yNC4yLTEwLjgtMjQuMi0yNC4yczEwLjgtMjQuMiAyNC4yLTI0LjIgMjQuMiAxMC44IDI0LjIgMjQuMi0xMC44IDI0LjItMjQuMiAyNC4yeiBtMTk5LjEgMGMtMTMuNCAwLTI0LjItMTAuOC0yNC4yLTI0LjJzMTAuOC0yNC4yIDI0LjItMjQuMiAyNC4yIDEwLjggMjQuMiAyNC4yLTEwLjggMjQuMi0yNC4yIDI0LjJ6IiBmaWxsPSIjMDdDMTYwIiBwLWlkPSI0MTYxIj48L3BhdGg+PHBhdGggZD0iTTUxMiA5NkMyODIuNiA5NiA5NiAyODIuNiA5NiA1MTJzMTg2LjYgNDE2IDQxNiA0MTYgNDE2LTE4Ni42IDQxNi00MTZTNzQxLjQgOTYgNTEyIDk2eiBtLTEuMSA0NzQuNGMtMjUuOCAwLTQ2LjMtMi4yLTcxLjQtNi4zbC03MS4zIDM1LjcgMjAuNC02MS4yYy01MS4xLTM1LjgtODEuMy04MS45LTgxLjMtMTM3LjkgMC05Ny4zIDkyLTE3NC4yIDIwMy42LTE3NC4yIDEwMC4xIDAgMTg3LjQgNjAuOCAyMDUgMTQyLjQtNi41LTAuNy0xMy0xLjEtMTkuNi0xLjEtOTcuMiAwLTE3My43IDcyLjYtMTczLjcgMTYyLjEgMCAxNC45IDIuNCAyOS4yIDYuNSA0Mi45LTYuNSAwLjUtMTIuMSAwLjYtMTguMiAwLjZ6IG0yOTcuOSA3MS4zIDE1LjIgNTAuNS01NS4zLTMwLjdjLTIwLjQgNS4xLTQwLjggMTAuMS02MS4yIDEwLjEtOTcuMyAwLTE3NC4yLTY2LjMtMTc0LjItMTQ4LjMgMC04MS45IDc2LjktMTQ4LjMgMTc0LjItMTQ4LjMgOTIgMCAxNzMuNyA2Ni4zIDE3My43IDE0OC4zIDAgNDUuOC0zMC42IDg2LjYtNzIuNSAxMTguNHoiIGZpbGw9IiMwN0MxNjAiIHAtaWQ9IjQxNjIiPjwvcGF0aD48L3N2Zz4=');
+}
+
+.method-icon.alipay {
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB0PSIxNjI3NTQ2NjI5MzI1IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjUzMDgiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cGF0aCBkPSJNMTAyNCA3MDEuNTAzNDgxYzAgMC0xODcuNzIxMTg1LTEzMi4xOTI1OTMtMjIzLjk0OTYzLTE0Ny4yMjk2MzEtODIuNTU3MDM3LTM0LjM5ODUxOS0yMTMuMDc0MDc0LTU1LjY3NDAzNy0zMzYuNzM3MTg1LTIxLjI3NTU1NmwtMC4wMDM3MDQgMC4wMDM3MDRjLTU5LjE0OTAzNyAxNi40NTkyNTktMTIyLjA0NzQwNyA0MC4xMzYyOTYtMTgzLjgxMzE4NSA2Ni4xMDM3MDQtNjEuNzY1OTI2IDI1Ljk2NzQwNy0xMjEuMjA4NTkzIDU0LjgzNTIyMi0xNzYuMTI4IDg0LjM5NzAzN2wwLjAwMzcwNCAwLjAwMzcwNHYtMjMxLjEzNDgxNWMwLTEyNS45NTI1OTMgMTAyLjA5NDgxNS0yMjguMDQ3NDA3IDIyOC4wNDc0MDctMjI4LjA0NzQwN2g0NTYuMDk0ODE1YzEyNS45NTI1OTMgMCAyMjguMDQ3NDA3IDEwMi4wOTQ4MTUgMjI4LjA0NzQwNyAyMjguMDQ3NDA3djI1Ni4wNDc0MDdjMCAwLTAuMDAzNzA0IDAtMC4wMDM3MDQgMGwwLjAwMzcwNCAwLjAwMzcwNGMwIDAtMC4wMDM3MDQgMC0wLjAwMzcwNCAwbDAgMHYtNy45MTkyNTl6TTUxMiA5NkMyODIuNjI0IDk2IDk2IDI4Mi42MjQgOTYgNTEyYzAgMjI5LjM3NiAxODYuNjI0IDQxNiA0MTYgNDE2IDIyOS4zNzYgMCA0MTYtMTg2LjYyNCA0MTYtNDE2QzkyOCAyODIuNjI0IDc0MS4zNzYgOTYgNTEyIDk2ek0yODUuNjk2IDcwMS41MDM0ODFjMCAwIDQwLjEzNjI5Ni0xNDcuMjI5NjMgMjU2LjA0NzQwNy0yMDkuNTk5MDM3bDAuMDAzNzA0IDAuMDAzNzA0YzAgMC0yNzEuMDg0NDQ0IDExMC45MTcwMzctMjU2LjA0NzQwNyAyMDkuNTk5MDM3bC0wLjAwMzcwNC0wLjAwMzcwNHogbTQ1Ni4wOTQ4MTUgMGMwIDAgMTAuNjM3OTI2LTQyLjc1MzE4NS0xMDYuMzc5MjU5LTg0LjM5NzAzN2wwLjAwMzcwNCAwLjAwMzcwNGMwIDAgODUuMTAzNDA3IDQyLjc1MzE4NSAxMDYuMzc5MjU5IDg0LjM5NzAzN2wtMC4wMDM3MDQtMC4wMDM3MDR6IG0tMjI4LjA0NzQwNy0xNjkuMTk3MDM3YzAgMC0xMjcuNzkyNTkzLTQyLjc1MzE4NS0xNDkuMDY4MTQ4LTQyLjc1MzE4NS0yMS4yNzU1NTYgMC00Mi41NTExMTEgMjEuMjc1NTU2LTIxLjI3NTU1NiA0Mi43NTMxODUgMjEuMjc1NTU2IDIxLjQ3NzYzIDg1LjEwMzQwNyA2NC4yMzA4MTUgMTQ5LjA2ODE0OCA2NC4yMzA4MTUgNjMuOTY0NzQxIDAgMTQ5LjA2ODE0OC00Mi43NTMxODUgMTQ5LjA2ODE0OC00Mi43NTMxODUgMCAwIDQyLjc1MzE4NS0yMS4yNzU1NTYgMjEuMjc1NTU2LTQyLjc1MzE4NS0yMS40Nzc2My0yMS40Nzc2My0xNDkuMDY4MTQ4IDIxLjI3NTU1Ni0xNDkuMDY4MTQ4IDIxLjI3NTU1NnoiIGZpbGw9IiMxMjk2ZGIiIHAtaWQ9IjUzMDkiPjwvcGF0aD48L3N2Zz4=');
+}
+
+.method-name {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.method-check {
+  margin-right: 10rpx;
+}
+
+/* 底部支付按钮 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  z-index: 100;
+  padding: 0 30rpx;
+}
+
+.total-price {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.price {
+  color: #FF6B6B;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+.action-buttons {
+  display: flex;
+}
+
+.btn-cancel, .btn-pay {
+  width: 160rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  margin-left: 20rpx;
+  padding: 0;
+}
+
+.btn-cancel {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+.btn-pay {
+  background-color: #FF6B6B;
+  color: #fff;
+}
+
+.btn-pay:active {
+  background-color: #FF5252;
+}
+
+/* 加载中和空状态 */
+.empty-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+} 

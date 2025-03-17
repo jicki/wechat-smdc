@@ -1,0 +1,630 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 餐厅信息 */
+.restaurant-info {
+  padding: 20rpx;
+  background-color: #fff;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+/* 固定头部 */
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.restaurant-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.restaurant-logo {
+  width: 80rpx;
+  height: 80rpx;
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.restaurant-details {
+  flex: 1;
+}
+
+.restaurant-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.restaurant-desc {
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.restaurant-promotion {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 15rpx;
+  background-color: #FFF8F8;
+  border-radius: 8rpx;
+}
+
+.promotion-icon {
+  margin-right: 10rpx;
+}
+
+.promotion-text {
+  font-size: 24rpx;
+  color: #FF6B6B;
+}
+
+/* 菜单内容 */
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.menu-content {
+  display: flex;
+  flex: 1;
+  background-color: #fff;
+  overflow: hidden;
+  height: calc(100vh - 95rpx); /* 减去底部购物车栏的高度 */
+  margin-top: 170rpx; /* 为固定头部留出更多空间 */
+  margin-bottom: 100rpx;
+}
+
+/* 左侧分类列表 */
+.category-list {
+  width: 180rpx;
+  height: 100%;
+  background-color: #f8f8f8;
+  padding-bottom: 120rpx; /* 添加底部内边距，与右侧菜品列表一致 */
+  padding-top: 10rpx;
+}
+
+.category-item {
+  padding: 30rpx 10rpx;
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  position: relative;
+  border-left: 6rpx solid transparent;
+  height: auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10rpx 0;
+}
+
+.category-item.active {
+  color: #FF6B6B;
+  background-color: #fff;
+  border-left: 6rpx solid #FF6B6B;
+  font-weight: bold;
+}
+
+/* 右侧菜品列表 */
+.food-list {
+  flex: 1;
+  height: 100%;
+  padding: 0 20rpx;
+  padding-bottom: 180rpx; /* 进一步增加底部内边距，确保最后的菜品不会被底部购物车栏遮挡 */
+}
+
+.food-category {
+  padding: 20rpx 0;
+}
+
+.category-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  padding: 20rpx 0;
+}
+
+.food-item {
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.food-image {
+  width: 160rpx;
+  height: 160rpx;
+  margin-right: 20rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+  position: relative;
+  background-color: #f8f8f8;
+}
+
+.food-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.food-image image {
+  width: 100%;
+  height: 100%;
+}
+
+.food-tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #FF6B6B;
+  color: #fff;
+  font-size: 20rpx;
+  padding: 4rpx 8rpx;
+  border-radius: 0 0 8rpx 0;
+}
+
+.food-tag.spicy {
+  left: auto;
+  right: 0;
+  background-color: #FF9500;
+  border-radius: 0 0 0 8rpx;
+}
+
+.food-info {
+  flex: 1;
+  position: relative;
+}
+
+.food-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.food-desc {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.food-sales {
+  font-size: 22rpx;
+  color: #999;
+  margin-bottom: 16rpx;
+}
+
+.food-price-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.food-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.price {
+  font-size: 32rpx;
+  color: #FF6B6B;
+  font-weight: bold;
+  margin-right: 10rpx;
+}
+
+.original-price {
+  font-size: 24rpx;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.food-actions {
+  display: flex;
+  align-items: center;
+}
+
+.action-btn {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.action-btn.plus {
+  background-color: #FF6B6B;
+  color: #fff;
+}
+
+.action-btn.minus {
+  background-color: #fff;
+  color: #666;
+  border: 1rpx solid #ddd;
+}
+
+.food-count {
+  width: 50rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+/* 购物车展开面板 */
+.cart-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 100rpx; /* 为底部购物车栏留出空间 */
+  z-index: 200; /* 提高z-index，确保在菜单内容之上 */
+  pointer-events: none; /* 默认不接收点击事件，让下层元素可以点击 */
+}
+
+.cart-panel.show {
+  pointer-events: none; /* 即使显示时也不接收点击事件，只有子元素接收 */
+}
+
+/* 遮罩层 */
+.cart-panel-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none; /* 默认不接收点击事件 */
+}
+
+.cart-panel.show .cart-panel-mask {
+  opacity: 1;
+  pointer-events: auto; /* 显示时接收点击事件 */
+}
+
+/* 右侧操作区域 - 不再需要 */
+.cart-panel-right-area {
+  display: none;
+}
+
+/* 内容区域 */
+.cart-panel-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  border-radius: 20rpx 20rpx 0 0;
+  transform: translateY(100%);
+  transition: transform 0.3s;
+  max-height: 60vh; /* 增加最大高度为视口高度的60%，确保有足够的空间 */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -4rpx 10rpx rgba(0, 0, 0, 0.1);
+  pointer-events: auto; /* 内容区域始终接收点击事件 */
+}
+
+.cart-panel.show .cart-panel-content {
+  transform: translateY(0);
+}
+
+.cart-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  background-color: #fff;
+  border-radius: 20rpx 20rpx 0 0;
+  flex-wrap: nowrap; /* 防止头部换行 */
+}
+
+.cart-panel-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  white-space: nowrap; /* 防止标题换行 */
+}
+
+.cart-panel-clear {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #999;
+  white-space: nowrap; /* 防止清空按钮换行 */
+  margin-left: 10rpx; /* 增加左边距，与标题保持距离 */
+}
+
+.cart-panel-clear icon {
+  margin-right: 6rpx;
+}
+
+.cart-panel-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20rpx;
+  max-height: calc(60vh - 90rpx); /* 减去header的高度 */
+}
+
+.cart-panel-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 25rpx 20rpx 20rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+  flex-wrap: nowrap; /* 防止项目换行 */
+}
+
+.cart-panel-item:last-child {
+  border-bottom: none;
+}
+
+.cart-panel-item-name {
+  flex: 1;
+  font-size: 28rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 20rpx;
+}
+
+.cart-panel-item-price {
+  font-size: 28rpx;
+  color: #FF6B6B;
+  font-weight: bold;
+  margin-right: 30rpx;
+  white-space: nowrap;
+  flex-shrink: 0; /* 防止价格收缩 */
+}
+
+.cart-panel-item-actions {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  flex-shrink: 0; /* 防止操作按钮收缩 */
+  margin-right: 10rpx; /* 右侧留出一些空间 */
+}
+
+/* 底部购物车 */
+.cart-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  z-index: 200; /* 提高z-index，确保在菜单内容之上 */
+}
+
+.cart-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+}
+
+.cart-icon {
+  width: 80rpx;
+  height: 80rpx;
+  background-color: #ccc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20rpx;
+  position: relative;
+}
+
+.cart-icon.active {
+  background-color: #FF6B6B;
+}
+
+.cart-count {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  background-color: #FF5252;
+  color: #fff;
+  font-size: 20rpx;
+  min-width: 36rpx;
+  height: 36rpx;
+  border-radius: 18rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 6rpx;
+}
+
+.cart-price {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.cart-price.active {
+  color: #333;
+  font-weight: bold;
+}
+
+.cart-submit {
+  width: 200rpx;
+  height: 100%;
+  background-color: #ccc;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30rpx;
+}
+
+.cart-submit.active {
+  background-color: #FF6B6B;
+}
+
+/* 加载中和空状态 */
+.loading-container, .empty-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400rpx;
+}
+
+.loading, .empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.food-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8rpx;
+  object-fit: cover;
+}
+
+.cart-panel-item-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+
+.cart-panel-item-img {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 6rpx;
+  margin-right: 10rpx;
+  object-fit: cover;
+}
+
+/* 添加最后一个分类部分的样式 */
+.category-section:last-child {
+  margin-bottom: 180rpx; /* 为最后一个分类添加更多底部边距 */
+}
+
+/* 自定义购物车图标 */
+.cart-icon-custom {
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+}
+
+/* 购物车顶部 */
+.cart-icon-custom:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5rpx;
+  width: 30rpx;
+  height: 10rpx;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+  background-color: #fff;
+}
+
+/* 购物车把手 */
+.cart-icon-custom:after {
+  content: '';
+  position: absolute;
+  top: -5rpx;
+  left: 12rpx;
+  width: 16rpx;
+  height: 12rpx;
+  border: 3rpx solid #fff;
+  border-bottom: none;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+
+/* 购物车主体 */
+.cart-icon-custom {
+  background: transparent;
+  border: 3rpx solid #fff;
+  border-top: none;
+  border-radius: 0 0 5rpx 5rpx;
+  position: relative;
+}
+
+/* 购物车轮子 */
+.cart-icon-custom:before {
+  content: '';
+  position: absolute;
+  bottom: 2rpx;
+  left: 8rpx;
+  width: 8rpx;
+  height: 8rpx;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.cart-icon-custom:after {
+  content: '';
+  position: absolute;
+  bottom: 2rpx;
+  right: 8rpx;
+  width: 8rpx;
+  height: 8rpx;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+/* 购物车图标 */
+.shopping-cart-icon {
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+  display: inline-block;
+}
+
+/* 购物车主体 */
+.shopping-cart-icon:before {
+  content: '';
+  position: absolute;
+  width: 36rpx;
+  height: 24rpx;
+  bottom: 0;
+  left: 2rpx;
+  background-color: #fff;
+  border-radius: 0 0 4rpx 4rpx;
+}
+
+/* 购物车把手 */
+.shopping-cart-icon:after {
+  content: '';
+  position: absolute;
+  width: 20rpx;
+  height: 20rpx;
+  top: 0;
+  left: 10rpx;
+  border: 3rpx solid #fff;
+  border-bottom: none;
+  border-radius: 10rpx 10rpx 0 0;
+} 

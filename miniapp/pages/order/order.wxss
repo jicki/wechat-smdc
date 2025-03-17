@@ -1,0 +1,224 @@
+/* 标签栏 */
+.tabs {
+  display: flex;
+  background-color: #fff;
+  border-bottom: 1rpx solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx 0;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #FF6B6B;
+  font-weight: bold;
+}
+
+.tab-line {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 6rpx;
+  background-color: #FF6B6B;
+  border-radius: 3rpx;
+}
+
+/* 订单列表 */
+.order-list {
+  padding: 20rpx;
+}
+
+.order-item {
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* 订单头部 - 订单号和状态 */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  background-color: #f9f9f9;
+}
+
+.order-id {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-status {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.order-status.PENDING {
+  color: #FF9500;
+}
+
+.order-status.COMPLETED {
+  color: #4CD964;
+}
+
+.order-status.CANCELLED {
+  color: #999;
+}
+
+/* 餐厅信息 */
+.restaurant-info {
+  padding: 20rpx 20rpx 10rpx;
+}
+
+.restaurant-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.order-content {
+  padding: 10rpx 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+/* 桌台号样式 */
+.order-table-no {
+  font-size: 26rpx;
+  margin-bottom: 10rpx;
+  display: flex;
+  align-items: center;
+}
+
+.table-label {
+  color: #666;
+  margin-right: 10rpx;
+}
+
+.table-value {
+  color: #FF6B6B;
+  font-weight: bold;
+}
+
+.order-foods {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.order-price {
+  font-size: 26rpx;
+  color: #666;
+  text-align: right;
+}
+
+.price {
+  color: #FF6B6B;
+  font-weight: bold;
+  font-size: 30rpx;
+  margin-left: 10rpx;
+}
+
+/* 订单时间信息 */
+.order-time-info {
+  padding: 15rpx 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.order-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 订单操作按钮 */
+.order-footer {
+  padding: 20rpx;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.order-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-btn {
+  font-size: 24rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 30rpx;
+  margin-left: 10rpx;
+  white-space: nowrap;
+  display: inline-block;
+  min-width: 80rpx;
+  text-align: center;
+  line-height: 1.5;
+  min-height: auto;
+  box-sizing: border-box;
+  position: relative;
+  overflow: visible;
+}
+
+.action-btn.pay {
+  color: #fff;
+  background-color: #FF6B6B;
+  border: 1rpx solid #FF6B6B;
+}
+
+.action-btn.cancel {
+  color: #666;
+  background-color: #f0f0f0;
+  border: 1rpx solid #ddd;
+}
+
+/* 按钮悬停效果 */
+.button-hover {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+/* 加载中和空状态 */
+.loading-container, .empty-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300rpx;
+}
+
+.loading, .empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 加载更多 */
+.loading-more {
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+.loading-more .loading,
+.loading-more .no-more {
+  font-size: 24rpx;
+  color: #999;
+} 

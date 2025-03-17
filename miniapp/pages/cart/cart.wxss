@@ -1,0 +1,209 @@
+.container {
+  padding-bottom: 120rpx;
+}
+
+/* 卡片通用样式 */
+.card {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 餐厅信息 */
+.restaurant-info {
+  margin-bottom: 20rpx;
+}
+
+.restaurant-name {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+/* 桌台号信息 */
+.table-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding: 15rpx 20rpx;
+}
+
+.table-info.warning {
+  background-color: #FFF8E1;
+  border: 1rpx solid #FFE0B2;
+}
+
+.table-info.optional {
+  background-color: #F9F9F9;
+  border: 1rpx solid #EEEEEE;
+}
+
+.table-icon {
+  margin-right: 10rpx;
+}
+
+.table-text {
+  font-size: 28rpx;
+  color: #FF6B6B;
+  font-weight: bold;
+}
+
+.table-text.warning {
+  color: #FF9800;
+}
+
+.table-text.optional {
+  color: #999;
+  font-weight: normal;
+}
+
+/* 购物车列表 */
+.cart-list {
+  margin-bottom: 20rpx;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.cart-title {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.cart-clear {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.cart-items {
+  padding-top: 20rpx;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-name {
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
+
+.item-price {
+  font-size: 28rpx;
+  color: #FF6B6B;
+  font-weight: bold;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+}
+
+.action-btn {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.action-btn.plus {
+  background-color: #FF6B6B;
+  color: #fff;
+}
+
+.action-btn.minus {
+  background-color: #fff;
+  color: #666;
+  border: 1rpx solid #ddd;
+}
+
+.item-count {
+  width: 60rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+/* 备注 */
+.remark-section {
+  margin-bottom: 20rpx;
+}
+
+.remark-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.remark-input {
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+  padding: 20rpx;
+}
+
+.remark-input input {
+  width: 100%;
+  height: 60rpx;
+  font-size: 28rpx;
+}
+
+/* 底部结算栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.total-price {
+  flex: 1;
+  padding-left: 30rpx;
+  font-size: 28rpx;
+}
+
+.price {
+  color: #FF6B6B;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+.submit-btn {
+  width: 240rpx;
+  height: 100%;
+  background-color: #FF6B6B;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+}
+
+.submit-btn:active {
+  background-color: #FF5252;
+} 

@@ -1,0 +1,72 @@
+<view class="container">
+  <!-- 餐厅信息 -->
+  <view class="restaurant-info card" wx:if="{{restaurant}}">
+    <view class="restaurant-name">{{restaurant.name}}</view>
+  </view>
+  
+  <!-- 桌台号信息 -->
+  <view class="table-info card" wx:if="{{tableNo}}">
+    <view class="table-icon">
+      <icon type="info" size="18" color="#FF6B6B"></icon>
+    </view>
+    <view class="table-text">桌台号: {{tableNo}}</view>
+  </view>
+  <view class="table-info card optional" wx:else>
+    <view class="table-icon">
+      <icon type="info" size="18" color="#999"></icon>
+    </view>
+    <view class="table-text optional">桌台号: 未设置 (可选)</view>
+  </view>
+  
+  <!-- 购物车商品列表 -->
+  <view class="cart-list card">
+    <view class="cart-header">
+      <view class="cart-title">已选商品</view>
+      <view class="cart-clear" bindtap="clearCart">清空购物车</view>
+    </view>
+    
+    <view class="cart-items">
+      <view class="cart-item" wx:for="{{cart.items}}" wx:key="id">
+        <view class="item-info">
+          <view class="item-name">{{item.name}}</view>
+          <view class="item-price">¥{{item.price}}</view>
+        </view>
+        
+        <view class="item-actions">
+          <view class="action-btn minus" bindtap="removeItem" data-id="{{item.id}}">
+            <text>-</text>
+          </view>
+          <view class="item-count">{{item.quantity}}</view>
+          <view class="action-btn plus" bindtap="addItem" data-id="{{item.id}}">
+            <text>+</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 备注 -->
+  <view class="remark-section card">
+    <view class="remark-title">备注</view>
+    <view class="remark-input">
+      <input 
+        placeholder="请输入备注信息（选填）" 
+        value="{{remark}}" 
+        bindinput="inputRemark"
+        maxlength="50"
+      />
+    </view>
+  </view>
+  
+  <!-- 底部结算栏 -->
+  <view class="bottom-bar">
+    <view class="total-price">
+      <text>合计：</text>
+      <text class="price">¥{{cart.totalPrice}}</text>
+    </view>
+    
+    <view class="submit-btn" bindtap="submitOrder">
+      <text>去结算</text>
+    </view>
+  </view>
+</view> 

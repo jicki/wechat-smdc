@@ -1,0 +1,97 @@
+<view class="container">
+  <!-- 餐厅信息展示 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <view class="loading">加载中...</view>
+  </view>
+  
+  <view wx:else class="restaurant-detail">
+    <!-- 餐厅封面图 -->
+    <view class="restaurant-banner">
+      <image 
+        wx:if="{{restaurant.logo}}" 
+        src="{{restaurant.logo}}" 
+        mode="aspectFill" 
+        class="restaurant-image"
+        lazy-load="true"
+      ></image>
+      <view class="restaurant-icon" wx:else>
+        <icon type="success" size="60" color="#FF6B6B"></icon>
+      </view>
+    </view>
+    
+    <!-- 桌台号显示 -->
+    <view class="table-info" wx:if="{{tableNo}}">
+      <view class="table-number">
+        <icon type="info" size="20" color="#FF6B6B"></icon>
+        <text>桌台号: {{tableNo}}</text>
+      </view>
+    </view>
+    
+    <!-- 餐厅基本信息 -->
+    <view class="restaurant-header">
+      <view class="restaurant-name">{{restaurant.name}}</view>
+      <view class="restaurant-rating">
+        <text class="rating-score">{{restaurant.rating}}</text>
+        <text class="rating-count">({{restaurant.ratingCount}})</text>
+      </view>
+      <view class="restaurant-price">人均 ¥{{restaurant.averagePrice}}</view>
+      <view class="restaurant-tags">
+        <text class="tag" wx:for="{{restaurant.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+      </view>
+      <view class="restaurant-promotion" wx:if="{{restaurant.promotion}}">
+        <text class="promotion-text">{{restaurant.promotion}}</text>
+      </view>
+    </view>
+    
+    <!-- 餐厅详细信息 -->
+    <view class="info-section">
+      <view class="info-item" bindtap="viewLocation">
+        <view class="info-icon">
+          <icon type="location" size="20" color="#FF6B6B"></icon>
+        </view>
+        <view class="info-content">
+          <view class="info-label">地址</view>
+          <view class="info-text">{{restaurant.address}}</view>
+        </view>
+        <view class="info-arrow">
+          <icon type="arrow" size="16" color="#999"></icon>
+        </view>
+      </view>
+      
+      <view class="info-item" bindtap="callRestaurant">
+        <view class="info-icon">
+          <icon type="phone" size="20" color="#FF6B6B"></icon>
+        </view>
+        <view class="info-content">
+          <view class="info-label">电话</view>
+          <view class="info-text">{{restaurant.phone}}</view>
+        </view>
+        <view class="info-arrow">
+          <icon type="arrow" size="16" color="#999"></icon>
+        </view>
+      </view>
+      
+      <view class="info-item">
+        <view class="info-icon">
+          <icon type="time" size="20" color="#FF6B6B"></icon>
+        </view>
+        <view class="info-content">
+          <view class="info-label">营业时间</view>
+          <view class="info-text">{{restaurant.businessHours}}</view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 餐厅描述 -->
+    <view class="description-section">
+      <view class="section-title">餐厅简介</view>
+      <view class="description-content">{{restaurant.description}}</view>
+    </view>
+  </view>
+  
+  <!-- 底部固定按钮 -->
+  <view class="order-button-container">
+    <button class="order-button" bindtap="goToMenu">开始点餐</button>
+    <!-- <button class="test-button" bindtap="goToTest">桌台码测试</button> -->
+  </view>
+</view> 
