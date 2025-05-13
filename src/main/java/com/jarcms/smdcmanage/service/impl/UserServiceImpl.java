@@ -65,8 +65,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
 
         // 验证密码
-        log.debug("验证密码: inputPassword={}, dbPassword={}", password, user.getPassword());
-        if (!passwordEncoder.matches(password, user.getPassword())) {
+        String encodedPassword = user.getPassword();
+        log.info("密码验证 - 输入密码: {}, 数据库密码: {}", password, encodedPassword);
+        
+        boolean matches = passwordEncoder.matches(password, encodedPassword);
+        log.info("密码匹配结果: {}", matches);
+        
+        if (!matches) {
             log.warn("密码错误: phone={}", phone);
             throw new BusinessException("密码错误");
         }
