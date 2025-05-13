@@ -18,4 +18,4 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 -- 创建管理员账号 (密码: admin123)
 INSERT INTO `user` (`phone`, `password`, `nickname`, `role`, `status`) VALUES 
-('admin', '$2a$10$N.ZOn9G6/YLFixAOPMg/h.z7pCu6v2XyFDtC4q.jeeGm/TEZyj15C', '管理员', 1, 0); 
+('admin', '$2a$10$zH7.oZAIQUxVBrQKyqQVsuXToX6EkJqHw3y6mIkHMBVHBJDLfR7Hy', '管理员', 1, 0); 
