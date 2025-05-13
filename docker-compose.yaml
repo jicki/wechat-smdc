@@ -24,6 +24,20 @@ services:
       - smdc-network
     restart: always
 
+  # 管理后台前端
+  admin:
+    build: 
+      context: ./admin-web
+      dockerfile: Dockerfile
+    container_name: wechat-smdc-admin
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+    networks:
+      - smdc-network
+    restart: always
+
   # MySQL服务
   mysql:
     image: mysql:5.7
