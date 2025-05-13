@@ -45,6 +45,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public String login(String phone, String password) {
+        log.info("用户登录: phone={}", phone);
+        
         // 根据手机号查询用户
         User user = getOne(new LambdaQueryWrapper<User>()
                 .eq(User::getPhone, phone)
@@ -52,21 +54,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         // 用户不存在
         if (user == null) {
+            log.warn("用户不存在: phone={}", phone);
             throw new BusinessException("用户不存在");
         }
 
         // 账号被禁用
         if (user.getStatus() == 1) {
+            log.warn("账号被禁用: phone={}", phone);
             throw new BusinessException("账号已被禁用");
         }
 
-        // 密码错误
+        // 验证密码
+        log.debug("验证密码: inputPassword={}, dbPassword={}", password, user.getPassword());
         if (!passwordEncoder.matches(password, user.getPassword())) {
+            log.warn("密码错误: phone={}", phone);
             throw new BusinessException("密码错误");
         }
 
         // 生成token
-        return jwtTokenUtil.generateToken(user.getId(), user.getPhone(), user.getRole());
+        String token = jwtTokenUtil.generateToken(user.getId(), user.getPhone(), user.getRole());
+        log.info("登录成功: phone={}, userId={}", phone, user.getId());
+        return token;
     }
 
     @Override
