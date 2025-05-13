@@ -1,5 +1,6 @@
 # 构建阶段
-FROM --platform=linux/arm64/v8 maven:3.8.7-eclipse-temurin-8 AS builder
+# FROM --platform=linux/arm64/v8 maven:3.8.7-eclipse-temurin-8 AS builder
+FROM maven:3.8.7-eclipse-temurin-8 AS builder
 
 WORKDIR /app
 COPY pom.xml .
@@ -9,7 +10,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # 运行阶段
-FROM --platform=linux/arm64/v8 eclipse-temurin:8-jre-jammy
+FROM eclipse-temurin:8-jre-jammy
 
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
