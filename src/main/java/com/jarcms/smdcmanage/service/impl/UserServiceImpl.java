@@ -45,7 +45,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public String login(String phone, String password) {
-        log.info("用户登录: phone={}", phone);
+        log.info("用户登录开始: phone={}", phone);
+        
+        // 生成一个新的密码哈希
+        String newHash = passwordEncoder.encode("admin123");
+        log.info("新生成的密码哈希: {}", newHash);
         
         // 根据手机号查询用户
         User user = getOne(new LambdaQueryWrapper<User>()
@@ -68,8 +72,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String encodedPassword = user.getPassword();
         log.info("密码验证 - 输入密码: {}, 数据库密码: {}", password, encodedPassword);
         
+        // 使用 BCrypt 验证
         boolean matches = passwordEncoder.matches(password, encodedPassword);
-        log.info("密码匹配结果: {}", matches);
+        log.info("BCrypt 密码匹配结果: {}", matches);
         
         if (!matches) {
             log.warn("密码错误: phone={}", phone);
