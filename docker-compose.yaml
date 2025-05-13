@@ -40,7 +40,7 @@ services:
 
   # MySQL服务
   mysql:
-    image: mysql:8.0
+    image: mysql:8.0.42
     # platform: linux/arm64/v8
     container_name: wechat-smdc-mysql
     environment:
