@@ -41,8 +41,9 @@ build-admin:
 	cd admin-web && docker build -t $(ADMIN_IMAGE) .
 	docker tag $(ADMIN_IMAGE) $(REGISTRY)/wechat-smdc-admin:latest
 
-.PHONY: build-image
-build-image:
+# 构建后端应用镜像
+.PHONY: build-app
+build-app:
 	@echo "构建 Docker 镜像..."
 	docker build -t $(DOCKER_IMAGE) .
 	docker tag $(DOCKER_IMAGE) $(REGISTRY)/wechat-smdc-app:latest
@@ -81,12 +82,6 @@ restart:
 
 .PHONY: all
 all: build-admin build-app
-
-# 构建后端应用镜像
-.PHONY: build-app
-build-app:
-	@echo "Building app image..."
-	docker build -t $(APP_IMAGE) .
 
 # 推送镜像到仓库
 .PHONY: push
