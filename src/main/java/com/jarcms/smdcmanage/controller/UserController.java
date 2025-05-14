@@ -149,23 +149,28 @@ public class UserController {
      */
     @PostMapping("/resetAdminPassword")
     public Result<String> resetAdminPassword() {
-        // 生成新的密码
-        String newPassword = "admin123";
-        
-        // 查询管理员用户
-        User admin = userService.getOne(new LambdaQueryWrapper<User>()
-                .eq(User::getPhone, "admin")
-                .eq(User::getRole, 1)
-                .eq(User::getDeleted, 0));
-                
-        if (admin == null) {
-            return Result.failed("管理员用户不存在");
+        try {
+            // 生成新的密码
+            String newPassword = "admin123";
+            String encodedPassword = passwordEncoder.encode(newPassword);
+            
+            // 查询管理员用户
+            User admin = userService.getOne(new LambdaQueryWrapper<User>()
+                    .eq(User::getPhone, "admin")
+                    .eq(User::getRole, 1)
+                    .eq(User::getDeleted, 0));
+                    
+            if (admin == null) {
+                return Result.failed("管理员用户不存在");
+            }
+            
+            // 更新密码
+            admin.setPassword(encodedPassword);
+            userService.updateById(admin);
+            
+            return Result.success("密码重置成功，新密码：" + newPassword + "，新密码哈希：" + encodedPassword);
+        } catch (Exception e) {
+            return Result.failed("密码重置失败：" + e.getMessage());
         }
-        
-        // 更新密码
-        admin.setPassword(passwordEncoder.encode(newPassword));
-        userService.updateById(admin);
-        
-        return Result.success("密码重置成功，新密码：" + newPassword);
     }
 } 

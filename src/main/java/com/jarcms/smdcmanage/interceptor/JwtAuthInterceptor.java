@@ -28,6 +28,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
     private static final List<String> WHITE_LIST = Arrays.asList(
         "/api/user/login",
         "/api/user/register",
+        "/api/user/resetAdminPassword",
         "/api/shop/info",
         "/api/shop/list",
         "/api/shop/detail",
