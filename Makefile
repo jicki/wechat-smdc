@@ -4,21 +4,31 @@ VERSION=$(shell git describe --tags --always --dirty)
 DOCKER_IMAGE=$(APP_NAME):$(VERSION)
 ADMIN_IMAGE=$(APP_NAME)-admin:$(VERSION)
 
+# 定义变量
+REGISTRY ?= jicki
+VERSION ?= latest
+ADMIN_IMAGE = $(REGISTRY)/wechat-smdc-admin:$(VERSION)
+APP_IMAGE = $(REGISTRY)/wechat-smdc-app:$(VERSION)
+
 # 默认目标
 .DEFAULT_GOAL := help
 
 .PHONY: help
 help:
-	@echo "可用的 make 命令："
-	@echo "  build-jar    - 使用 Maven 构建 JAR 包"
-	@echo "  build-admin  - 构建管理后台前端"
-	@echo "  build-image  - 构建后端 Docker 镜像"
-	@echo "  build-all    - 构建所有组件"
-	@echo "  clean        - 清理构建文件"
-	@echo "  up           - 启动所有服务"
-	@echo "  down         - 停止所有服务"
-	@echo "  logs         - 查看服务日志"
-	@echo "  restart      - 重启所有服务"
+	@echo "可用的命令:"
+	@echo "  all         - 构建管理后台和后端应用镜像"
+	@echo "  build-admin - 构建管理后台镜像"
+	@echo "  build-app   - 构建后端应用镜像"
+	@echo "  push        - 推送镜像到仓库"
+	@echo "  up          - 启动所有服务"
+	@echo "  down        - 停止所有服务"
+	@echo "  restart     - 重启所有服务"
+	@echo "  logs        - 查看服务日志"
+	@echo "  clean       - 清理构建产物和镜像"
+	@echo ""
+	@echo "环境变量:"
+	@echo "  REGISTRY  - Docker 仓库地址 (默认: jicki)"
+	@echo "  VERSION   - 镜像版本标签 (默认: latest)"
 
 .PHONY: build-jar
 build-jar:
@@ -27,8 +37,8 @@ build-jar:
 
 .PHONY: build-admin
 build-admin:
-	@echo "构建管理后台前端..."
-	cd admin-web && npm install && npm run build
+	@echo "Building admin image..."
+	cd admin-web && docker build -t $(ADMIN_IMAGE) .
 
 .PHONY: build-image
 build-image:
@@ -37,7 +47,7 @@ build-image:
 	docker tag $(DOCKER_IMAGE) $(APP_NAME):latest
 
 .PHONY: build-all
-build-all: build-admin build-image
+build-all: build-jar build-admin build-image
 
 .PHONY: clean
 clean:
@@ -46,6 +56,7 @@ clean:
 	rm -rf target/
 	rm -rf admin-web/dist/
 	rm -rf admin-web/node_modules/
+	docker rmi $(ADMIN_IMAGE) $(APP_IMAGE) || true
 
 .PHONY: up
 up:
@@ -65,4 +76,19 @@ logs:
 .PHONY: restart
 restart:
 	@echo "重启所有服务..."
-	docker-compose restart 
+	docker-compose restart
+
+.PHONY: all
+all: build-admin build-app
+
+# 构建后端应用镜像
+.PHONY: build-app
+build-app:
+	@echo "Building app image..."
+	docker build -t $(APP_IMAGE) .
+
+# 推送镜像到仓库
+.PHONY: push
+push:
+	docker push $(ADMIN_IMAGE)
+	docker push $(APP_IMAGE) 
