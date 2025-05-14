@@ -37,7 +37,7 @@ build-image:
 	docker tag $(DOCKER_IMAGE) $(APP_NAME):latest
 
 .PHONY: build-all
-build-all: build-jar build-admin build-image
+build-all: build-admin build-image
 
 .PHONY: clean
 clean:
