@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 
 // 配置axios
-axios.defaults.baseURL = 'http://localhost:8080'
+axios.defaults.baseURL = 'http://smdc-app:8080'
 // 请求拦截器，添加token
 axios.interceptors.request.use(config => {
   const token = localStorage.getItem('token')

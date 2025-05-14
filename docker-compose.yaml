@@ -2,30 +2,30 @@ version: '3.8'
 
 services:
   # 应用服务
-  app:
+  smdc-app:
     build: .
     container_name: wechat-smdc-app
     ports:
       - "8081:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/smdcmanage?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      - SPRING_DATASOURCE_URL=jdbc:mysql://smdc-mysql:3306/smdcmanage?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=123456
-      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_HOST=smdc-redis
       - SPRING_REDIS_PORT=6379
       - JAVA_OPTS=-Xms512m -Xmx512m -Djava.security.egd=file:/dev/./urandom
     volumes:
       - ./uploads:/app/uploads
     depends_on:
-      - mysql
-      - redis
+      - smdc-mysql
+      - smdc-redis
     networks:
       - smdc-network
     restart: always
 
   # 管理后台前端
-  admin:
+  smdc-admin:
     build: 
       context: ./admin-web
       dockerfile: Dockerfile
@@ -33,13 +33,13 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      - app
+      - smdc-app
     networks:
       - smdc-network
     restart: always
 
   # MySQL服务
-  mysql:
+  smdc-mysql:
     image: mysql:8.0.42
     # platform: linux/arm64/v8
     container_name: wechat-smdc-mysql
@@ -62,7 +62,7 @@ services:
     restart: always
 
   # Redis服务
-  redis:
+  smdc-redis:
     image: redis:7.2
     # platform: linux/arm64/v8
     container_name: wechat-smdc-redis
