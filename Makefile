@@ -39,12 +39,13 @@ build-jar:
 build-admin:
 	@echo "Building admin image..."
 	cd admin-web && docker build -t $(ADMIN_IMAGE) .
+	docker tag $(ADMIN_IMAGE) $(ADMIN_IMAGE):latest
 
 .PHONY: build-image
 build-image:
 	@echo "构建 Docker 镜像..."
 	docker build -t $(DOCKER_IMAGE) .
-	docker tag $(DOCKER_IMAGE) $(APP_NAME):latest
+	docker tag $(DOCKER_IMAGE) $(DOCKER_IMAGE):latest
 
 .PHONY: build-all
 build-all: build-jar build-admin build-image

@@ -3,7 +3,7 @@ version: '3.8'
 services:
   # 应用服务
   smdc-app:
-    build: .
+    image: jicki/wechat-smdc-app:latest
     container_name: wechat-smdc-app
     ports:
       - "8081:8080"
@@ -26,9 +26,7 @@ services:
 
   # 管理后台前端
   smdc-admin:
-    build: 
-      context: ./admin-web
-      dockerfile: Dockerfile
+    image: jicki/wechat-smdc-admin:latest
     container_name: wechat-smdc-admin
     ports:
       - "8080:80"
