@@ -1,5 +1,6 @@
 package com.jarcms.smdcmanage.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jarcms.smdcmanage.common.Result;
 import com.jarcms.smdcmanage.dto.LoginDTO;
@@ -10,6 +11,7 @@ import com.jarcms.smdcmanage.entity.User;
 import com.jarcms.smdcmanage.service.UserService;
 import com.jarcms.smdcmanage.vo.WxLoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +27,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * 用户登录
@@ -137,5 +142,30 @@ public class UserController {
         }
         userService.updateStatus(id, status);
         return Result.success();
+    }
+
+    /**
+     * 重置管理员密码
+     */
+    @PostMapping("/resetAdminPassword")
+    public Result<String> resetAdminPassword() {
+        // 生成新的密码
+        String newPassword = "admin123";
+        
+        // 查询管理员用户
+        User admin = userService.getOne(new LambdaQueryWrapper<User>()
+                .eq(User::getPhone, "admin")
+                .eq(User::getRole, 1)
+                .eq(User::getDeleted, 0));
+                
+        if (admin == null) {
+            return Result.failed("管理员用户不存在");
+        }
+        
+        // 更新密码
+        admin.setPassword(passwordEncoder.encode(newPassword));
+        userService.updateById(admin);
+        
+        return Result.success("密码重置成功，新密码：" + newPassword);
     }
 } 
