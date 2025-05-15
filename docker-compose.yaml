@@ -3,20 +3,29 @@ version: '3.8'
 services:
   # 应用服务
   smdc-app:
-    image: jicki/wechat-smdc-app:latest
+    image: ${REGISTRY}/wechat-smdc-app:${VERSION}
     container_name: wechat-smdc-app
     ports:
-      - "8081:8080"
+      - "${APP_PORT}:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_DATASOURCE_URL=jdbc:mysql://smdc-mysql:3306/smdcmanage?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=123456
+      - SPRING_DATASOURCE_URL=jdbc:mysql://smdc-mysql:3306/${MYSQL_DATABASE}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
       - SPRING_REDIS_HOST=smdc-redis
-      - SPRING_REDIS_PORT=6379
-      - JAVA_OPTS=-Xms512m -Xmx512m -Djava.security.egd=file:/dev/./urandom
+      - SPRING_REDIS_PORT=${REDIS_PORT}
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRATION=${JWT_EXPIRATION}
+      - WX_APPID=${WX_APPID}
+      - WX_SECRET=${WX_SECRET}
+      - WX_MCHID=${WX_MCHID}
+      - WX_KEY=${WX_KEY}
+      - WX_NOTIFY_URL=${WX_NOTIFY_URL}
+      - TZ=${TZ}
+      - JAVA_OPTS=${JAVA_OPTS}
     volumes:
-      - ./uploads:/app/uploads
+      - ${UPLOAD_DIR}:/app/uploads
     depends_on:
       - smdc-mysql
       - smdc-redis
@@ -26,10 +35,12 @@ services:
 
   # 管理后台前端
   smdc-admin:
-    image: jicki/wechat-smdc-admin:latest
+    image: ${REGISTRY}/wechat-smdc-admin:${VERSION}
     container_name: wechat-smdc-admin
     ports:
-      - "8080:80"
+      - "${ADMIN_PORT}:80"
+    environment:
+      - TZ=${TZ}
     depends_on:
       - smdc-app
     networks:
@@ -39,14 +50,15 @@ services:
   # MySQL服务
   smdc-mysql:
     image: mysql:8.0.42
-    # platform: linux/arm64/v8
     container_name: wechat-smdc-mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=smdcmanage
-      - TZ=Asia/Shanghai
-    #ports:
-    #  - "3306:3306"
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - TZ=${TZ}
+    ports:
+      - "${MYSQL_PORT}:3306"
     volumes:
       - mysql-data:/var/lib/mysql
       - ./mysql/init:/docker-entrypoint-initdb.d/
@@ -62,13 +74,14 @@ services:
   # Redis服务
   smdc-redis:
     image: redis:7.2
-    # platform: linux/arm64/v8
     container_name: wechat-smdc-redis
-    #ports:
-    #  - "6379:6379"
+    ports:
+      - "${REDIS_PORT}:6379"
+    environment:
+      - TZ=${TZ}
+    command: redis-server --appendonly yes ${REDIS_PASSWORD:+--requirepass ${REDIS_PASSWORD}}
     volumes:
       - redis-data:/data
-    command: redis-server --appendonly yes
     networks:
       - smdc-network
     restart: always
